@@ -13,6 +13,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.bluelinelabs.conductor.Controller;
+import java.util.concurrent.Callable;
 import me.tatarka.loadie.Loader;
 import me.tatarka.loadie.LoaderManager;
 import me.tatarka.loadie.RxLoader;
@@ -34,7 +35,8 @@ public class NoUserInput extends Controller {
   @BindView(R.id.editText) EditText input;
 
   @OnClick(R.id.button) void startLoader() {
-    if (!loader.hasResult() && !loader.isRunning()) loader.start();
+    if (!loader.hasResult() && !loader.isRunning()) {
+      loader.start();}
   }
 
   @OnClick(R.id.button2) void restartLoader() {
@@ -63,8 +65,11 @@ public class NoUserInput extends Controller {
     title.setText(TAG);
 
     loader = loaderManager.init(NO_USER_INPUT_LOADER_ID,
-        RxLoader.create(Observable.just(input.getText().toString())),
-        stringMyLoaderCallbacks = new MyLoaderCallbacks<String>() {
+        RxLoader.create(Observable.fromCallable(new Callable<String>() {
+          @Override public String call() throws Exception {
+            return input.getText().toString();
+          }
+        })), stringMyLoaderCallbacks = new MyLoaderCallbacks<String>() {
         });
     return rootView;
   }

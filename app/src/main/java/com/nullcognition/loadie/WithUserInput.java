@@ -37,7 +37,7 @@ public class WithUserInput extends Controller {
   @OnClick(R.id.button) void startLoader() {
 
     if (!loader.hasResult() && !loader.isRunning()) {
-      if (loader.getCallbacks() == null) loader.setCallbacks(stringMyLoaderCallbacks);
+      //if (loader.getCallbacks() == null) loader.setCallbacks(stringMyLoaderCallbacks);
       loader.start();
     }
   }
@@ -55,6 +55,8 @@ public class WithUserInput extends Controller {
 
   public WithUserInput() {
     loaderManager = LoaderManagerProvider.forController(this);
+
+
   }
 
   @NonNull @Override
@@ -73,6 +75,7 @@ public class WithUserInput extends Controller {
           }
         })), stringMyLoaderCallbacks = new MyLoaderCallbacks<String>() {
         });
+
 
     return rootView;
   }

@@ -16,18 +16,19 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    ViewGroup container = (ViewGroup) findViewById(R.id.controller_container);
+    ViewGroup container2 = (ViewGroup) findViewById(R.id.controller_container2);
+    router2 = Conductor.attachRouter(this, container2, savedInstanceState);
+    if (!router2.hasRootController()) {
+      router2.setRoot(RouterTransaction.with(new NoUserInput()));
+    }
 
+    ViewGroup container = (ViewGroup) findViewById(R.id.controller_container);
     router = Conductor.attachRouter(this, container, savedInstanceState);
     if (!router.hasRootController()) {
       router.setRoot(RouterTransaction.with(new WithUserInput()));
     }
 
-    ViewGroup container2 = (ViewGroup) findViewById(R.id.controller_container2);
-    router2 = Conductor.attachRouter(this, container2, savedInstanceState);
-    if (!router2.hasRootController()) {
-      router2.pushController(RouterTransaction.with(new NoUserInput()));
-    }
+
   }
 }
 
