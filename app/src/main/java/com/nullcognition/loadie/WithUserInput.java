@@ -56,7 +56,13 @@ public class WithUserInput extends Controller {
   public WithUserInput() {
     loaderManager = LoaderManagerProvider.forController(this);
 
-
+    loader = loaderManager.init(WITH_USER_INPUT_LOADER_ID,
+        RxLoader.create(Observable.fromCallable(new Callable<String>() {
+          @Override public String call() throws Exception {
+            return input.getText().toString();
+          }
+        })), stringMyLoaderCallbacks = new MyLoaderCallbacks<String>() {
+        });
   }
 
   @NonNull @Override
@@ -68,24 +74,10 @@ public class WithUserInput extends Controller {
     input.setText(TAG);
     title.setText(TAG);
 
-    loader = loaderManager.init(WITH_USER_INPUT_LOADER_ID,
-        RxLoader.create(Observable.fromCallable(new Callable<String>() {
-          @Override public String call() throws Exception {
-            return input.getText().toString();
-          }
-        })), stringMyLoaderCallbacks = new MyLoaderCallbacks<String>() {
-        });
-
-
     return rootView;
   }
 
-  @Override protected void onAttach(@NonNull View view) {
-    super.onAttach(view);
-  }
-
   @Override protected void onDestroyView(@NonNull View view) {
-    loaderManager.detach();
     unbinder.unbind();
     super.onDestroyView(view);
   }

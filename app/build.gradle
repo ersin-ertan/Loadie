@@ -31,10 +31,10 @@ dependencies {
   compile 'io.reactivex:rxandroid:1.2.1'
   compile 'io.reactivex:rxjava:1.2.6'
 
-  compile 'me.tatarka.loadie:loadie-rx:0.1'
-  compile 'me.tatarka.loadie:loadie:0.1'
-  compile 'me.tatarka.loadie:loadie-components:0.1'
-  compile 'me.tatarka.loadie:loadie-conductor:0.1'
+  compile 'me.tatarka.loadie:loadie-rx:0.2'
+  compile 'me.tatarka.loadie:loadie:0.2'
+  compile 'me.tatarka.loadie:loadie-components:0.2'
+  compile 'me.tatarka.loadie:loadie-conductor:0.2'
 
   compile 'com.bluelinelabs:conductor:2.1.0'
 
